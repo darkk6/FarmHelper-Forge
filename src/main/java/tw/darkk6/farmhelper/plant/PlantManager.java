@@ -15,13 +15,13 @@ public class PlantManager {
 	public static HashMap<Item,IPlants> map;
 	static{
 		immutableMap=new HashMap<Item, IPlants>();
-		immutableMap.put(Items.beetroot_seeds, new BeetrootSeed());
-		immutableMap.put(Items.carrot, new Carrot());
-		immutableMap.put(Items.melon_seeds, new MelonSeed());
-		immutableMap.put(Items.nether_wart, new NetherWart());
-		immutableMap.put(Items.potato, new Potato());
-		immutableMap.put(Items.pumpkin_seeds, new PumpkinSeed());
-		immutableMap.put(Items.wheat_seeds, new WheatSeed());
+		immutableMap.put(Items.BEETROOT_SEEDS, new BeetrootSeed());
+		immutableMap.put(Items.CARROT, new Carrot());
+		immutableMap.put(Items.MELON_SEEDS, new MelonSeed());
+		immutableMap.put(Items.NETHER_WART, new NetherWart());
+		immutableMap.put(Items.POTATO, new Potato());
+		immutableMap.put(Items.PUMPKIN_SEEDS, new PumpkinSeed());
+		immutableMap.put(Items.WHEAT_SEEDS, new WheatSeed());
 	}
 	public static void update(){
 		if(Reference.config==null) return;
@@ -29,19 +29,19 @@ public class PlantManager {
 		else map.clear();
 		
 		if(Reference.config.beetroot)
-			map.put(Items.beetroot_seeds, immutableMap.get(Items.beetroot_seeds));
+			map.put(Items.BEETROOT_SEEDS, immutableMap.get(Items.BEETROOT_SEEDS));
 		if(Reference.config.carrot)
-			map.put(Items.carrot, immutableMap.get(Items.carrot));
+			map.put(Items.CARROT, immutableMap.get(Items.CARROT));
 		if(Reference.config.melon)
-			map.put(Items.melon_seeds, immutableMap.get(Items.melon_seeds));
+			map.put(Items.MELON_SEEDS, immutableMap.get(Items.MELON_SEEDS));
 		if(Reference.config.wart)
-			map.put(Items.nether_wart, immutableMap.get(Items.nether_wart));
+			map.put(Items.NETHER_WART, immutableMap.get(Items.NETHER_WART));
 		if(Reference.config.potato)
-			map.put(Items.potato, immutableMap.get(Items.potato));
+			map.put(Items.POTATO, immutableMap.get(Items.POTATO));
 		if(Reference.config.pumpkin)
-			map.put(Items.pumpkin_seeds, immutableMap.get(Items.pumpkin_seeds));
+			map.put(Items.PUMPKIN_SEEDS, immutableMap.get(Items.PUMPKIN_SEEDS));
 		if(Reference.config.wheat)
-			map.put(Items.wheat_seeds, immutableMap.get(Items.wheat_seeds));
+			map.put(Items.WHEAT_SEEDS, immutableMap.get(Items.WHEAT_SEEDS));
 	}
 	
 	public static IPlants get(Item item){

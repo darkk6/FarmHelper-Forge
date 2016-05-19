@@ -8,9 +8,7 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraftforge.client.event.MouseEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,6 +20,8 @@ import tw.darkk6.farmhelper.plant.PlantManager;
 
 public class EventHandler {
 	
+	private boolean rightClickEventLock=false;
+	
 	//可以用這個事件訂閱設定檔改變事件
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent e) {
@@ -30,7 +30,7 @@ public class EventHandler {
 			PlantManager.update();
 		}
 	}
-	
+	/*
 	//這個版本的限制就是必須是滑鼠右鍵點選，有改過控制可能就不行
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
@@ -47,27 +47,30 @@ public class EventHandler {
 		
 		//應該沒問題可以觸發 onBlockRightClick 了
 		this.onBlockRightClick(
-				new InteractEventWarpper(
-						PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK,
+				new RightClickBlockEventWarpper(
 						pointed.getBlockPos(),
 						pointed.sideHit
 					)
 			);
 	}
-
-	/*
-	 * 等 PlayerInteractEvent 的 RIGHT_CLICK_BLOCK 正常運作了再改回來
-	 * #1811 還沒有回來
+	*/
+	// 1.9.4 移除了 PlayerInteractEvent 的 Action enum , 直接指定需要的 Event
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void onPlayerInteract(PlayerInteractEvent evt){
-		this.onBlockRightClick(new InteractEventWarpper(evt));
+	public void onPlayerInteract(RightClickBlock evt){
+		//盡量減少重複觸發的次數
+		if(!rightClickEventLock){
+			rightClickEventLock=true;
+			this.onBlockRightClick(new RightClickBlockEventWarpper(evt));
+			rightClickEventLock=false;
+		}
 	}
-	*/
 	
 	
-	private void onBlockRightClick(InteractEventWarpper e){
-		if(e.action!=PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) return;
+	private void onBlockRightClick(RightClickBlockEventWarpper e){
+		//這邊只接收 RightClickBlockEvent , 因此可以不用判斷了
+		// Lagecy : if(e.action!=PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) return;
+		//if(!e.isRightClickEvent()) return;
 		Minecraft mc=Minecraft.getMinecraft();
 		EntityPlayerSP player=mc.thePlayer;
 		if(player==null) return;//避免出錯，檢查一下

@@ -6,6 +6,6 @@ import net.minecraft.item.Item;
 public class BeetrootSeed extends FarmlandPlantBase {
 	@Override
 	public Item getItem() {
-		return Items.beetroot_seeds;
+		return Items.BEETROOT_SEEDS;
 	}
 }

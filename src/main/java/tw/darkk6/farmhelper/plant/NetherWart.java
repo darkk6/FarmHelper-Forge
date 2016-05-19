@@ -12,7 +12,7 @@ public class NetherWart extends IPlants {
 
 	@Override
 	public Item getItem() {
-		return Items.nether_wart;
+		return Items.NETHER_WART;
 	}
 
 	@Override

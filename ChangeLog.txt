@@ -1,4 +1,8 @@
 ** Do not preview this file in mediafire , please download it.
+- 1.6-mc1.9.4
+    恢復使用「與方塊互動事件」來做觸發 ( Forge 修正了這個問題，所以可以使用了 )
+    南瓜與西瓜種子預設為 false
+    Forge 請使用 #1909 以上版本
 
 - 1.5beta-mc1.9
     API 更新到 Forge 1.9 - 12.16.0.1811 , 此版本開始必須使用 #1811 以上版本

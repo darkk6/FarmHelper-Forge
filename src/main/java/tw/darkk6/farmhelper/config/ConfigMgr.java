@@ -19,7 +19,7 @@ public class ConfigMgr {
 	
 	private Configuration cfg = null;
 
-	public boolean wheat=true, pumpkin=true, melon=true, carrot=true, potato=true, wart=true, beetroot=true;
+	public boolean wheat=true, pumpkin=false, melon=false, carrot=true, potato=true, wart=true, beetroot=true;
 	public boolean fasterBFS=false;
 
 	public ConfigMgr(File file) {
